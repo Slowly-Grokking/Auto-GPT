@@ -88,6 +88,8 @@ def get_prompt() -> str:
         ("Task Complete (Shutdown)", "task_complete", {"reason": "<reason>"}),
         ("Generate Image", "generate_image", {"prompt": "<prompt>"}),
         ("Send Tweet", "send_tweet", {"text": "<text>"}),
+        ("Add to Memory", "memory_add", {"string": "<data to store>"}),
+        ("Get Memory", "memory_get", {"string": "<search string to find relevant memories>"}),
     ]
 
     # Only add the audio to text command if the model is specified

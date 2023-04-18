@@ -8,7 +8,7 @@ from autogpt.llm_utils import create_chat_completion
 from autogpt.memory import get_memory
 
 CFG = Config()
-MEMORY = get_memory(CFG)
+MEMORY = get_memory(CFG, init=False)
 
 
 def split_text(text: str, max_length: int = 8192) -> Generator[str, None, None]:

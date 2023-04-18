@@ -102,6 +102,7 @@ class Config(metaclass=Singleton):
         self.wipe_redis_on_start = os.getenv("WIPE_REDIS_ON_START", "True") == "True"
         self.memory_index = os.getenv("MEMORY_INDEX", "auto-gpt")
         # Note that indexes must be created on db 0 in redis, this is not configurable.
+        self.init_memory = "False"
 
         self.memory_backend = os.getenv("MEMORY_BACKEND", "local")
         # Initialize the OpenAI API client
@@ -224,6 +225,10 @@ class Config(metaclass=Singleton):
     def set_debug_mode(self, value: bool) -> None:
         """Set the debug mode value."""
         self.debug_mode = value
+
+    def set_init_memory(self, value: bool) -> None:
+        """Set the debug mode value."""
+        self.init_memory = value
 
 
 def check_openai_api_key() -> None:

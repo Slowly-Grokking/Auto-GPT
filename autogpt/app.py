@@ -142,10 +142,10 @@ def execute_command(command_name: str, arguments):
 
             return safe_message.decode("utf-8")
         elif command_name == "memory_add":
-            memory = get_memory(CFG)
+            memory = get_memory(CFG, init=False)
             return memory.add(arguments["string"])
         elif command_name == "memory_get":
-            memory = get_memory(CFG)
+            memory = get_memory(CFG, init=False)
             return memory.get_relevant(arguments["string"], 3)
         elif command_name == "start_agent":
             return start_agent(

@@ -32,6 +32,7 @@ import click
     type=str,
     help="Defines which Memory backend to use",
 )
+@click.option("--init-memory", is_flag=True, help="Reset memory on load = True")
 @click.option(
     "-b",
     "--browser-name",
@@ -58,6 +59,7 @@ def main(
     debug: bool,
     gpt3only: bool,
     gpt4only: bool,
+    init_memory:bool,
     memory_type: str,
     browser_name: str,
     allow_downloads: bool,
@@ -94,6 +96,7 @@ def main(
             debug,
             gpt3only,
             gpt4only,
+            init_memory,
             memory_type,
             browser_name,
             allow_downloads,
@@ -117,7 +120,7 @@ def main(
         )
         # Initialize memory and make sure it is empty.
         # this is particularly important for indexing and referencing pinecone memory
-        memory = get_memory(cfg, init=True)
+        memory = get_memory(cfg, init=init_memory)
         logger.typewriter_log(
             "Using memory of type:", Fore.GREEN, f"{memory.__class__.__name__}"
         )

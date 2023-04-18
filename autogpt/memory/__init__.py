@@ -38,7 +38,7 @@ except ImportError:
     MilvusMemory = None
 
 
-def get_memory(cfg, init=False):
+def get_memory(cfg, init):
     memory = None
     if cfg.memory_backend == "pinecone":
         if not PineconeMemory:
@@ -50,6 +50,8 @@ def get_memory(cfg, init=False):
             memory = PineconeMemory(cfg)
             if init:
                 memory.clear()
+    elif cfg.init_memory == True:
+        RedisMemory(cfg).clear()
     elif cfg.memory_backend == "redis":
         if not RedisMemory:
             print(

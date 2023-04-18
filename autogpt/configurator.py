@@ -19,6 +19,7 @@ def create_config(
     debug: bool,
     gpt3only: bool,
     gpt4only: bool,
+    init_memory: bool,
     memory_type: str,
     browser_name: str,
     allow_downloads: bool,
@@ -35,6 +36,7 @@ def create_config(
         debug (bool): Whether to enable debug mode
         gpt3only (bool): Whether to enable GPT3.5 only mode
         gpt4only (bool): Whether to enable GPT4 only mode
+        init_memory (bool): True resets memory(only redis testing atm)
         memory_type (str): The type of memory backend to use
         browser_name (str): The name of the browser to use when using selenium to scrape the web
         allow_downloads (bool): Whether to allow Auto-GPT to download files natively
@@ -43,6 +45,7 @@ def create_config(
     CFG.set_debug_mode(False)
     CFG.set_continuous_mode(False)
     CFG.set_speak_mode(False)
+    CFG.set_init_memory(False)
 
     if debug:
         logger.typewriter_log("Debug Mode: ", Fore.GREEN, "ENABLED")
@@ -80,6 +83,11 @@ def create_config(
     if gpt4only:
         logger.typewriter_log("GPT4 Only Mode: ", Fore.GREEN, "ENABLED")
         CFG.set_fast_llm_model(CFG.smart_llm_model)
+
+    if init_memory:
+        logger.typewriter_log("Reset Memory: ", Fore.GREEN, "ENABLED")
+        CFG.set_init_memory(True)
+        CFG.wipe_redis_on_start = True
 
     if memory_type:
         supported_memory = get_supported_memory_backends()
