@@ -144,6 +144,9 @@ def execute_command(command_name: str, arguments):
         elif command_name == "memory_add":
             memory = get_memory(CFG)
             return memory.add(arguments["string"])
+        elif command_name == "memory_get":
+            memory = get_memory(CFG)
+            return memory.get_relevant(arguments["string"], 3)
         elif command_name == "start_agent":
             return start_agent(
                 arguments["name"], arguments["task"], arguments["prompt"]
